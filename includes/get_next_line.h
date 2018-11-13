@@ -13,7 +13,7 @@ struct	buffers
 	int					fd;
 	struct s_buffers	*next;
 	struct s_buffers	*previous;
-}
+};
 
 int	get_next_line(const int fd, char **line);
 

@@ -5,30 +5,28 @@ static int		key_management(int keycode, void *param)
 	struct info	*info;
 
 	info = (struct info*)param;
-	ft_putstr("The key pressed is : ");
-	ft_putnbr(keycode);
-	ft_putchar('\n');
+	printf("The key pressed is : %d\n.", keycode);
 	if (keycode == 0)
-		ft_putstr("A !\n");
+		printf("A !\n");
 	if (keycode == 13)
-		ft_putstr("W !\n");
+		printf("W !\n");
 	if (keycode == 2)
-		ft_putstr("D !\n");
+		printf("D !\n");
 	if (keycode == 1)
-		ft_putstr("S !\n");
+		printf("S !\n");
 	if (keycode == 15)
-		ft_putstr("Reset !\n");
+		printf("Reset !\n");
 	if (keycode == 123)
-		ft_putstr("Left !\n");
+		printf("Left !\n");
 	if (keycode == 124)
-		ft_putstr("Right !\n");
+		printf("Right !\n");
 	if (keycode == 125)
-		ft_putstr("Down !\n");
+		printf("Down !\n");
 	if (keycode == 126)
-		ft_putstr("Up !\n");
+		printf("Up !\n");
 	if (keycode == 53)
 		exit(0);
-	if (!(start_fill(info)));
+	if (!(start_fill(info)))
 		return (1);
 	return (0);
 }

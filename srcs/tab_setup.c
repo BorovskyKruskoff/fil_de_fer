@@ -9,7 +9,7 @@ static double	*fill_tab(double *tab, char *str, double size)
 		return (NULL);
 	while (a < size)
 	{
-		tab[a++] = ft_atoi(&str[b]);
+		tab[a++] = atoi(&str[b]);
 		while (str[b] && str[b] != ' ' && str[b] != '\n')
 			b++;
 		if (str[b] == ' ')
@@ -72,9 +72,9 @@ static double	get_linesize(char *line)
 
 	while (line[a])
 	{
-		if (line[a] && ft_isdigit(line[a]))
+		if (line[a] && isdigit(line[a]))
 			b++;
-		while (line[a] && ft_isdigit(line[a]))
+		while (line[a] && isdigit(line[a]))
 			a++;
 		if (line[a] == ' ')
 			a++;

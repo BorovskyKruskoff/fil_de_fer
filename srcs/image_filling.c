@@ -31,12 +31,12 @@ double			get_angle(struct info *info, double dir)
 	return (result);
 }
 
-void			get_line(struct point *actual, t_info *info)
+void			get_line(struct point *actual, struct info *info)
 {
 	info->angle.x = info->vectors_hor.x * dif(info, 0) *
-		(float)info->height * cos(info->rot_x);
-	info->angle.y = info->vectors_hor.y * (dif(info, 0) *
-		(float)info->height * cos(info->rot_y));
+		(float)info->height * cos(info->rot_x) * info->gap;
+	info->angle.y = info->vectors_hor.y * dif(info, 0) *
+		(float)info->height * cos(info->rot_y) * info->gap;
 	trace(actual, info);
 }
 
@@ -47,10 +47,10 @@ void			get_column(struct point *actual, struct info *info)
 
 	currentsave = actual->current;
 	linesave = actual->line;
-	info->angle.x = info->vectors_vert.x * (dif(info, 1) *
-		(float)info->height * cos(info->rot_x));
-	info->angle.y = info->vectors_vert.y * (dif(info, 1) *
-		(float)info->height * cos(info->rot_y));
+	info->angle.x = info->vectors_vert.x * dif(info, 1) *
+		(float)info->height * cos(info->rot_x) * info->gap;
+	info->angle.y = info->vectors_vert.y * dif(info, 1) *
+		(float)info->height * cos(info->rot_y) * info->gap;
 	trace(actual, info);
 	if !(info->transition)
 	{
@@ -87,4 +87,5 @@ double			fill_image(char **image, struct info *info)
 		actual->line = info->startpoint.line;
 		info->y += 1;
 	}
+	return 0;
 }

@@ -20,19 +20,19 @@ struct	vectors
 {
 	float			x;
 	float			y;
-}
+};
 
 struct	point
 {
 	double			current;
 	double			line;
-}
+};
 
 struct	color_node
 {
 	char			*color;
 	struct s_colors		*next;
-}
+};
 
 struct	info
 {
@@ -62,12 +62,9 @@ struct	info
 	double			size;
 	double			**tab;
 	struct color_node	*colorlist;
-}
+};
 
-struct point	trace_tleft(double current, double line, struct info *info);
-struct point	trace_bleft(double current, double line, struct info *info);
-struct point	trace_tright(double current, double line, struct info *info);
-struct point	trace_bright(double current, double line, struct info *info);
+void		trace(struct point *actual, struct info *info);
 double		check_winsize(void);
 double		start_fill(struct info *info);
 double		fill_image(struct info *info);
