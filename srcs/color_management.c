@@ -35,7 +35,7 @@ static double	conversion(char *str)
 	return (b);
 
 
-static double	transmute(char *str, t_colors *element)
+static double	transmute(char *str, struct color_node *element)
 {
 	double		a;
 	double		b;
@@ -54,16 +54,16 @@ static double	transmute(char *str, t_colors *element)
 	return (1);
 }
 
-static double	initialize_color(t_colors *color, char **argv, int a;)
+static double	initialize_color(struct color_node *color, char **argv, int a;)
 {
-	if (!(color = (t_colors*)malloc(sizeof(t_colors))))
+	if (!(color = (struct color_node*)malloc(sizeof(struct color_node))))
 		return (0);
 	if (!(transmute(argv[a])))
 		return (0);
 	return (1);
 }
 
-double			get_colors(int argc, char **argv, t_info *info)
+double			get_colors(int argc, char **argv, struct info *info)
 {
 	double			a;
 	t_colors	*current;

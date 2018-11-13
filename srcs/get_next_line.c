@@ -1,11 +1,11 @@
 #include "get_next_line.h"
 
-static t_buffers	*new_buffer(int fd, t_buffers *buffers)
+static struct buffers	*new_buffer(int fd, struct buffers *buffers)
 {
-	int			a;
-	t_buffers	*new;
+	int		a;
+	struct buffers	*new;
 
-	if (!(new = (t_buffers*)malloc(sizeof(*new))))
+	if (!(new = (struct buffers*)malloc(sizeof(*new))))
 		return (NULL);
 	a = 0;
 	buffers->next = new;
@@ -23,7 +23,7 @@ static t_buffers	*new_buffer(int fd, t_buffers *buffers)
 	return (new);
 }
 
-static int			check_return(t_buffers *t, char **line, int a, int rest)
+static int	check_return(struct buffers *t, char **line, int a, int rest)
 {
 	int		b;
 
@@ -42,17 +42,17 @@ static int			check_return(t_buffers *t, char **line, int a, int rest)
 	return (2);
 }
 
-static int			fill_n_append(t_buffers *t, char **line, int count)
+static int	fill_n_append(struct buffers *t, char **line, int count)
 {
-	int		a;
+	int	a = 0;
 	char	tmp;
 	char	*str;
 
 	if (count < 0)
 		return (-1);
-	a = 0;
 	t->buf[count] = 0;
-	while (t->buf[a] && t->buf[a] != '\n' && t->buf[a] != -1 && a < BUFF_SIZE)
+	while (t->buf[a] && t->buf[a] != '\n' && 
+		t->buf[a] != -1 && a < BUFF_SIZE)
 		a++;
 	if (count == 0 && (*line)[0] == 0)
 		return (0);
@@ -70,10 +70,10 @@ static int			fill_n_append(t_buffers *t, char **line, int count)
 	return (check_return(t, line, a, 0));
 }
 
-static int			check_fd(t_buffers *t, int fd, char **line)
+static int	check_fd(struct buffers *t, int fd, char **line)
 {
-	int			a;
-	int			b;
+	int	a;
+	int	b = 0;
 
 	t->fd = -1;
 	while (t->next && t->fd != fd)
@@ -93,7 +93,8 @@ static int			check_fd(t_buffers *t, int fd, char **line)
 		return (2);
 	if (t->buf[a] == '\n' || t->buf[a] == -1)
 		a++;
-	while (a < BUFF_SIZE && t->buf[a] != '\n' && t->buf[a] != -1 && t->buf[a])
+	while (a < BUFF_SIZE && t->buf[a] != '\n' &&
+		t->buf[a] != -1 && t->buf[a])
 		(*line)[b++] = t->buf[a++];
 	(*line)[b] = 0;
 	return (check_return(t, line, a, 1));
@@ -101,10 +102,10 @@ static int			check_fd(t_buffers *t, int fd, char **line)
 
 int					get_next_line(const int fd, char **line)
 {
-	int					count;
-	static t_buffers	buffers;
-	t_buffers			*t;
-	int					a;
+	int			count;
+	static struct buffers	buffers;
+	struct buffers		*t;
+	int			a;
 
 	if (fd < 0 || !(line))
 		return (-1);

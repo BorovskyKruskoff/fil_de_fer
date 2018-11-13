@@ -6,15 +6,15 @@
 # include <unistd.h>
 # include <stdlib.h>
 
-typedef struct			s_buffers
+struct	buffers
 {
 	char				*buf;
 	int					rest_index;
 	int					fd;
 	struct s_buffers	*next;
 	struct s_buffers	*previous;
-}						t_buffers;
+}
 
-int						get_next_line(const int fd, char **line);
+int	get_next_line(const int fd, char **line);
 
 #endif

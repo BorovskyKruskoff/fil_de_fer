@@ -2,11 +2,9 @@
 
 static double	*fill_tab(double *tab, char *str, double size)
 {
-	double		a;
-	double		b;
+	double		a = 0;
+	double		b = 0;
 
-	a = 0;
-	b = 0;
 	if (!(tab = (double*)malloc(sizeof(double) * size)))
 		return (NULL);
 	while (a < size)
@@ -27,9 +25,8 @@ static double	*fill_tab(double *tab, char *str, double size)
 
 static double	*fill_empty(double *tab, double size)
 {
-	double		c;
+	double	c = 0;
 
-	c = 0;
 	if (!(tab = (double*)malloc(sizeof(double) * size)))
 		return (NULL);
 	while (c < size)
@@ -40,13 +37,12 @@ static double	*fill_empty(double *tab, double size)
 	return (tab);
 }
 
-double			create_tab(char *str, t_info *info, double size)
+double			create_tab(char *str, struct info *info, double size)
 {
-	double		a;
+	double		a = 0;
 	double		fd;
 	char	*line;
 
-	a = 0;
 	fd = open(str, O_RDONLY);
 	if (!(info->tab = (double**)malloc(sizeof(double*) * size)))
 		return (0);
@@ -71,11 +67,9 @@ double			create_tab(char *str, t_info *info, double size)
 
 static double	get_linesize(char *line)
 {
-	double		a;
-	double		b;
+	double		a = 0;
+	double		b = 0;
 
-	a = 0;
-	b = 0;
 	while (line[a])
 	{
 		if (line[a] && ft_isdigit(line[a]))
@@ -94,15 +88,12 @@ static double	get_linesize(char *line)
 
 double			init_get_size(char *str)
 {
-	double		ysize;
-	double		size;
+	double		ysize = 0;
+	double		size = 0;
 	double		fd;
-	double		tmp;
+	double		tmp = 0;
 	char	*line;
 
-	ysize = 0;
-	tmp = 0;
-	size = 0;
 	fd = open(str, O_RDONLY);
 	while (get_next_line(fd, &line))
 	{

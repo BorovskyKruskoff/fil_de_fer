@@ -2,9 +2,9 @@
 
 static int		key_management(int keycode, void *param)
 {
-	t_info	*info;
+	struct info	*info;
 
-	info = (t_info*)param;
+	info = (struct info*)param;
 	ft_putstr("The key pressed is : ");
 	ft_putnbr(keycode);
 	ft_putchar('\n');
@@ -35,12 +35,12 @@ static int		key_management(int keycode, void *param)
 
 int				main(int argc, char **argv)
 {
-	t_info	*info;
-	void	*mlx;
-	void	*win;
+	struct info	*info;
+	void		*mlx;
+	void		*win;
 
 	
-	if (!(info = (t_info*)malloc(sizeof(t_info))))
+	if (!(info = (struct info*)malloc(sizeof(struct info))))
 		return (display_error(0));
 	if (error_management(argv, argc, info) || check_winsize())
 		return (1);
@@ -53,7 +53,6 @@ int				main(int argc, char **argv)
 	info->rot_z = 0;
 	info->pos_x = 0;
 	info->pos_y = 0;
-	info->pos_z = 0;
 	info->height = 1;
 	if (!(create_image(info)))
 		return (display_error(0));

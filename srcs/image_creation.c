@@ -1,6 +1,6 @@
 #include "fdf.h"
 
-static void	get_max_min(t_info *info)
+static void	get_max_min(struct info *info)
 {
 	int		max;
 	int		min;
@@ -27,20 +27,7 @@ static void	get_max_min(t_info *info)
 	info->max = (double)max;
 }
 
-static double	fill_arithmetic(t_info *info)
-{
-	if (!(info->vectors_hor = (t_vectors*)malloc(sizeof(t_vectors))))
-		return (0);
-	if (!(info->vectors_vert = (t_vectors*)malloc(sizeof(t_vectors))))
-		return (0);
-	if (!(info->angle_hor = (t_vectors*)malloc(sizeof(t_vectors))))
-		return (0);
-	if (!(info->angle_vert = (t_vectors*)malloc(sizeof(t_vectors))))
-		return (0);
-	return (1);
-}
-
-static double	prepare_fill(t_info *info, int btp)
+static double	prepare_fill(struct info *info, int btp)
 {
 	if (WINHEIGHT > WINLEN)
 		info->minsize = WINLEN;
@@ -49,14 +36,13 @@ static double	prepare_fill(t_info *info, int btp)
 	info->gap = ((minsize / 1.2) + pos_z) / info->size;
 	info->sizeline = btp * WINLEN;
 	info->btp = btp;
-	if (!(info->starpoint = (t_point)malloc(sizeof(t_point))))
+	if (!(info->starpoint = (struct point)malloc(sizeof(struct point))))
 		return (0);
 	get_max_min(info);
-	if (!(fill_arithmetic(info)))
-		return  (0);
+	return (1)'
 }
 
-static void	update_info(t_info *info)
+static void	update_info(struct info *info)
 {
 	if (info->rot_x >= 360)
 		info->rot_x -= 360;
@@ -80,7 +66,7 @@ static void	update_info(t_info *info)
 		info->pos_y += 100;
 }
 
-double			start_fill(t_info *info)
+double			start_fill(struct info *info)
 {
 	update_info(info);
 	info->vectors_hor->x = cos(info->rot_x) * cos(info->rot_z);
@@ -96,7 +82,7 @@ double			start_fill(t_info *info)
 	fill_image(info);
 }
 
-double			create_image(t_info *info)
+double			create_image(struct info *info)
 {
 	void	*image_pointer;
 	char	*image;
@@ -108,7 +94,8 @@ double			create_image(t_info *info)
 	size_line = (btp / 8) * WINLEN;
 	endian = 0;
 	image_pointer = mlx_new_image(info->mlx, WINLEN, WINHEIGHT);
-	image = mlx_get_data_addr(image_pointer, &(btp), &(size_line), &(endian));
+	image =
+	mlx_get_data_addr(image_pointer, &(btp), &(size_line), &(endian));
 	info->image = image;
 	if (!(prepare_fill(info, btp)))
 		return (0);

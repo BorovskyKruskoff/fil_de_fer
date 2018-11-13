@@ -16,68 +16,68 @@
 # define WINLEN 800
 # define WINHEIGHT 600
 
-typedef struct			s_vectors
+struct	vectors
 {
-	double			x;
-	double			y;
-}				t_vectors;
+	float			x;
+	float			y;
+}
 
-typedef struct			s_point
+struct	point
 {
 	double			current;
 	double			line;
-}				t_point;
+}
 
-typedef struct			s_colors
+struct	color_node
 {
 	char			*color;
 	struct s_colors		*next;
-}				t_colors;
+}
 
-typedef struct			s_info
+struct	info
 {
-	double			pos_x;                  x
-	double			pos_y;                  x
-	double			pos_z                   x
-	double			rot_x;                  x
-	double			rot_y;                  x
-	double			rot_z;                  x
-	double			height;                 x
-	double			transition;             x
-	double			gap;                    x
-	double			minsize;                x
-	double			btp;                    x
-	double			sizeline;               x
-	double			max;                    x
-	double			min;                    x
-	double			y;                      x
-	double			x;                      x
-	t_vectors		*vectors_hor;           x
-	t_vectors		*vectors_vert;          x
-	t_vectors		*angle;                 x
-	t_point			startpoint;
-	void			*mlx;                   x
-	void			*win;                   x
-	char			*image;                 x
-	double			size;                   x
-	double			**tab;                  x
-	t_colors		*colorlist;             x
-}				t_info;
+	double			pos_x;
+	double			pos_y;
+	float			rot_x;
+	float			rot_y;
+	float			rot_z;
+	double			height;
+	double			transition;
+	double			gap;
+	double			minsize;
+	double			btp;
+	double			sizeline;
+	double			max;
+	double			min;
+	double			y;
+	double			x;
+	struct vectors		vectors_hor;
+	struct vectors		vectors_vert;
+	struct vectors		angle;
+	struct vectors		decimals;
+	struct point		startpoint;
+	void			*mlx;
+	void			*win;
+	char			*image;
+	double			size;
+	double			**tab;
+	struct color_node	*colorlist;
+}
 
-t_point		trace_tleft(double current, double line, t_info *info);
-t_point		trace_bleft(double current, double line, t_info *info);
-t_point		trace_tright(double current, double line, t_info *info);
-t_point		trace_bright(double current, double line, t_info *info);
+struct point	trace_tleft(double current, double line, struct info *info);
+struct point	trace_bleft(double current, double line, struct info *info);
+struct point	trace_tright(double current, double line, struct info *info);
+struct point	trace_bright(double current, double line, struct info *info);
 double		check_winsize(void);
-double		start_fill(t_info *info);
-double		fill_image(t_info *info);
+double		start_fill(struct info *info);
+double		fill_image(struct info *info);
 double		put_pixel(double current, double line, double color);
-double		create_image(t_info *info);
-double		get_colors(int argc, char **argv, t_info *info);
-double		create_tab(char *str, t_info *info, double size); 
+double		create_image(struct info *info);
+double		get_colors(int argc, char **argv, struct info *info);
+double		create_tab(char *str, struct info *info, double size);
 double		init_get_size(char *str);
 double		display_error(int usage);
-double		error_management(char **argv, int argc, t_info *info);
-double		dif(t_info *info, double dir);
+double		error_management(char **argv, int argc, struct info *info);
+double		dif(struct info *info, double dir);
 
 #endif
