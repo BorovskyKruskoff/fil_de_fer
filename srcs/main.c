@@ -46,11 +46,12 @@ int				main(int argc, char **argv)
 	win = mlx_new_window(mlx, WINLEN, WINHEIGHT, "FdF ~ ggay");
 	info->mlx = mlx;
 	info->win = win;
-	info->rot_x = 0;
-	info->rot_y = 0;
-	info->rot_z = 0;
+	info->rot_x = 0.0;
+	info->rot_y = 0.0;
+	info->rot_z = 0.0;
 	info->pos_x = 0;
 	info->pos_y = 0;
+	info->pos_z = 0;
 	info->height = 1;
 	if (!(create_image(info)))
 		return (display_error(0));

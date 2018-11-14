@@ -3,16 +3,17 @@
 
 # define BUFF_SIZE 9999
 
+# include <string.h>
 # include <unistd.h>
 # include <stdlib.h>
 
 struct	buffers
 {
-	char				*buf;
-	int					rest_index;
-	int					fd;
-	struct s_buffers	*next;
-	struct s_buffers	*previous;
+	char		*buf;
+	int		rest_index;
+	int		fd;
+	struct buffers	*next;
+	struct buffers	*previous;
 };
 
 int	get_next_line(const int fd, char **line);

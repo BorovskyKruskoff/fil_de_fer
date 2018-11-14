@@ -1,22 +1,22 @@
 #include "fdf.h"
 
-double		display_error(int usage)
+int		display_error(int usage)
 {
 	if (usage == 1)
 	{
-		ft_putstr("usage: ./fdf file [colors]\nColors = FFFFFF\n");
+		printf("usage: ./fdf file [colors]\nColors = FFFFFF\n");
 		return (1);
 	}
 	if (usage == 2)
 	{
-		ft_putstr("The window's size is between 200 and 2500\n");
+		printf("The window's size is between 200 and 2500\n");
 		return (1);
 	}
 	ft_putstr("error\n");
 	return (1);
 }
 
-double		error_management(char **argv, int argc, struct info *info)
+int		error_management(char **argv, int argc, struct info *info)
 {
 	if (argc == 1)
 		return (display_error(1));
@@ -29,7 +29,7 @@ double		error_management(char **argv, int argc, struct info *info)
 	return (0);
 }
 
-double		check_winsize(void)
+int		check_winsize(void)
 {
 	if (WINLEN > 2500 || WINHEIGHT > 2500)
 		return (display_error(2));

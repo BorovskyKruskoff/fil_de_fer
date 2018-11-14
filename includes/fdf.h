@@ -9,6 +9,7 @@
 # include <math.h>
 # include <mlx.h>
 # include <fcntl.h>
+# include <string.h>
 # include <stdlib.h>
 # include <stdio.h>
 # include <unistd.h>
@@ -18,19 +19,19 @@
 
 struct	vectors
 {
-	float			x;
-	float			y;
+	double			x;
+	double			y;
 };
 
 struct	point
 {
-	double			current;
-	double			line;
+	int			current;
+	int			line;
 };
 
 struct	color_node
 {
-	char			*color;
+	char			color[3];
 	struct s_colors		*next;
 };
 
@@ -38,19 +39,22 @@ struct	info
 {
 	double			pos_x;
 	double			pos_y;
-	float			rot_x;
-	float			rot_y;
-	float			rot_z;
+	double			pos_z;
+	double			rot_x;
+	double			rot_y;
+	double			rot_z;
 	double			height;
-	double			transition;
 	double			gap;
-	double			minsize;
-	double			btp;
-	double			sizeline;
-	double			max;
-	double			min;
-	double			y;
-	double			x;
+	int			minsize;
+	int			btp;
+	int			sizeline;
+	int			max;
+	int			min;
+	int			y;
+	int			x;
+	int			size;
+	int			**tab;
+	int			transition;
 	struct vectors		vectors_hor;
 	struct vectors		vectors_vert;
 	struct vectors		angle;
@@ -59,22 +63,20 @@ struct	info
 	void			*mlx;
 	void			*win;
 	char			*image;
-	double			size;
-	double			**tab;
 	struct color_node	*colorlist;
 };
 
-void		trace(struct point *actual, struct info *info);
-double		check_winsize(void);
-double		start_fill(struct info *info);
-double		fill_image(struct info *info);
-double		put_pixel(double current, double line, double color);
-double		create_image(struct info *info);
-double		get_colors(int argc, char **argv, struct info *info);
-double		create_tab(char *str, struct info *info, double size);
-double		init_get_size(char *str);
-double		display_error(int usage);
-double		error_management(char **argv, int argc, struct info *info);
-double		dif(struct info *info, double dir);
+void	trace(struct point *actual, struct info *info);
+void	put_pixel(char *image, int current, int line, char *color);
+double	start_fill(struct info *info);
+double	create_image(struct info *info);
+double	dif(struct info *info, double dir);
+int	get_colors(int argc, char **argv, struct info *info);
+int	create_tab(char *str, struct info *info, int size);
+int	fill_image(struct info *info);
+int	init_get_size(char *str);
+int	display_error(int usage);
+int	error_management(char **argv, int argc, struct info *info);
+int	check_winsize(void);
 
 #endif

@@ -33,13 +33,11 @@ static double	prepare_fill(struct info *info, int btp)
 		info->minsize = WINLEN;
 	else
 		info->minsize = WINHEIGHT;
-	info->gap = ((minsize / 1.2) + pos_z) / info->size;
+	info->gap = ((info->minsize / 1.2) + info->pos_z) / info->size;
 	info->sizeline = btp * WINLEN;
 	info->btp = btp;
-	if (!(info->starpoint = (struct point)malloc(sizeof(struct point))))
-		return (0);
 	get_max_min(info);
-	return (1)'
+	return (1);
 }
 
 static void	update_info(struct info *info)
@@ -80,17 +78,19 @@ double			start_fill(struct info *info)
 	info->transition = 0;
 //	todo
 	info->startpoint.line = 10 + info->pos_y;
-	info->startpoint.current = (line * (3 * winlen)) + (info->pos_x * 3);
+	info->startpoint.current = (info->startpoint.line *
+		(3 * WINLEN)) + (info->pos_x * 3);
 	fill_image(info);
+	return 0;
 }
 
 double			create_image(struct info *info)
 {
 	void	*image_pointer;
 	char	*image;
-	double		size_line;
-	double		endian;
-	double		btp;
+	int		size_line;
+	int		endian;
+	int		btp;
 
 	btp = 8 * 3;
 	size_line = (btp / 8) * WINLEN;
@@ -102,4 +102,5 @@ double			create_image(struct info *info)
 	if (!(prepare_fill(info, btp)))
 		return (0);
 	start_fill(info);
+	return 0;
 }

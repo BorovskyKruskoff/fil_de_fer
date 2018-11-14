@@ -1,11 +1,11 @@
 #include "fdf.h"
 
-static double	*fill_tab(double *tab, char *str, double size)
+static int	*fill_tab(int *tab, char *str, int size)
 {
-	double		a = 0;
-	double		b = 0;
+	int		a = 0;
+	int		b = 0;
 
-	if (!(tab = (double*)malloc(sizeof(double) * size)))
+	if (!(tab = (int*)malloc(sizeof(int) * size)))
 		return (NULL);
 	while (a < size)
 	{
@@ -23,11 +23,11 @@ static double	*fill_tab(double *tab, char *str, double size)
 	return (tab);
 }
 
-static double	*fill_empty(double *tab, double size)
+static int	*create_empty(int *tab, int size)
 {
-	double	c = 0;
+	int	c = 0;
 
-	if (!(tab = (double*)malloc(sizeof(double) * size)))
+	if (!(tab = (int*)malloc(sizeof(int) * size)))
 		return (NULL);
 	while (c < size)
 	{
@@ -37,26 +37,28 @@ static double	*fill_empty(double *tab, double size)
 	return (tab);
 }
 
-double			create_tab(char *str, struct info *info, double size)
+int		create_tab(char *str, struct info *info, int size)
 {
-	double		a = 0;
-	double		fd;
+	int		a = 0;
+	int		fd;
 	char	*line;
 
 	fd = open(str, O_RDONLY);
-	if (!(info->tab = (double**)malloc(sizeof(double*) * size)))
+	if (!(info->tab = (int**)malloc(sizeof(int*) * size)))
 		return (0);
 	while (a < size)
 	{
 		if (get_next_line(fd, &line))
 		{
-			if (!(info->tab[a] = fill_tab(info->tab[a], line, size)))
+			if (!(info->tab[a] = fill_tab(info->tab[a],
+				line, size)))
 				return (0);
 			free(line);
 		}
 		else
 		{
-			if (!(info->tab[a] = fill_empty(info->tab[a], size)))
+			if (!(info->tab[a] = create_empty(info->tab[a],
+				size)))
 				return (0);
 		}
 		a++;
@@ -65,10 +67,10 @@ double			create_tab(char *str, struct info *info, double size)
 	return (1);
 }
 
-static double	get_linesize(char *line)
+static int	get_linesize(char *line)
 {
-	double		a = 0;
-	double		b = 0;
+	int		a = 0;
+	int		b = 0;
 
 	while (line[a])
 	{
@@ -86,12 +88,12 @@ static double	get_linesize(char *line)
 	return (b);
 }
 
-double			init_get_size(char *str)
+int			init_get_size(char *str)
 {
-	double		ysize = 0;
-	double		size = 0;
-	double		fd;
-	double		tmp = 0;
+	int		ysize = 0;
+	int		size = 0;
+	int		fd;
+	int		tmp = 0;
 	char	*line;
 
 	fd = open(str, O_RDONLY);

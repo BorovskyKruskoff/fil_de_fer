@@ -14,7 +14,7 @@ OBJ_NAME	= $(SRC_NAME:.c=.o)
 OBJ		= $(addprefix $(OBJ_PATH)/,$(OBJ_NAME))
 INCLUDES	= -I includes
 MLXFLAGS	= -lmlx -lX11 -lXext
-FLAGS		= -Wextra -Wall
+FLAGS		= -Wextra -Wall -std=c99
 CFLAGS		= $(INCLUDES) $(FLAGS) $(MLXFLAGS)
 CC		= gcc
 
