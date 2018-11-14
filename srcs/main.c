@@ -27,8 +27,8 @@ static int		key_management(int keycode, void *param)
 	if (keycode == 53)
 		exit(0);
 	if (!(start_fill(info)))
-		return (1);
-	return (0);
+		return 1;
+	return 0;
 }
 
 int				main(int argc, char **argv)
@@ -57,5 +57,5 @@ int				main(int argc, char **argv)
 		return (display_error(0));
 	mlx_key_hook(win, key_management, (void*)info);
 	mlx_loop(mlx);
-	return (0);
+	return 0;
 }

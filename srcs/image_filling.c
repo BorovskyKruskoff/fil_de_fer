@@ -27,8 +27,8 @@ double			get_angle(struct info *info, double dir)
 	magnitude = sqrt((1 + (itself * itself)));
 	result = acos(1.00 / magnitude);
 	if (itself < 0)
-		return (-result);
-	return (result);
+		return -result;
+	return result;
 }
 
 void			get_line(struct point *actual, struct info *info)

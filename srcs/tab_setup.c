@@ -6,7 +6,7 @@ static int	*fill_tab(int *tab, char *str, int size)
 	int		b = 0;
 
 	if (!(tab = (int*)malloc(sizeof(int) * size)))
-		return (NULL);
+		return NULL;
 	while (a < size)
 	{
 		tab[a++] = atoi(&str[b]);
@@ -20,7 +20,7 @@ static int	*fill_tab(int *tab, char *str, int size)
 				tab[a++] = 0;
 		}
 	}
-	return (tab);
+	return tab;
 }
 
 static int	*create_empty(int *tab, int size)
@@ -28,13 +28,13 @@ static int	*create_empty(int *tab, int size)
 	int	c = 0;
 
 	if (!(tab = (int*)malloc(sizeof(int) * size)))
-		return (NULL);
+		return NULL;
 	while (c < size)
 	{
 		tab[c] = 0;
 		c++;
 	}
-	return (tab);
+	return tab;
 }
 
 int		create_tab(char *str, struct info *info, int size)
@@ -45,26 +45,26 @@ int		create_tab(char *str, struct info *info, int size)
 
 	fd = open(str, O_RDONLY);
 	if (!(info->tab = (int**)malloc(sizeof(int*) * size)))
-		return (0);
+		return 0;
 	while (a < size)
 	{
 		if (get_next_line(fd, &line))
 		{
 			if (!(info->tab[a] = fill_tab(info->tab[a],
 				line, size)))
-				return (0);
+				return 0;
 			free(line);
 		}
 		else
 		{
 			if (!(info->tab[a] = create_empty(info->tab[a],
 				size)))
-				return (0);
+				return 0;
 		}
 		a++;
 	}
 	close(fd);
-	return (1);
+	return 1;
 }
 
 static int	get_linesize(char *line)
@@ -81,11 +81,11 @@ static int	get_linesize(char *line)
 		if (line[a] == ' ')
 			a++;
 		else if (!(line[a]))
-			return (b);
+			return b;
 		else
-			return (0);
+			return 0;
 	}
-	return (b);
+	return b;
 }
 
 int			init_get_size(char *str)
@@ -109,6 +109,6 @@ int			init_get_size(char *str)
 	}
 	close(fd);
 	if (ysize > size)
-		return (ysize);
-	return (size);
+		return ysize;
+	return size;
 }

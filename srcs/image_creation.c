@@ -37,7 +37,7 @@ static double	prepare_fill(struct info *info, int btp)
 	info->sizeline = btp * WINLEN;
 	info->btp = btp;
 	get_max_min(info);
-	return (1);
+	return 1;
 }
 
 static void	update_info(struct info *info)
@@ -100,7 +100,7 @@ double			create_image(struct info *info)
 	mlx_get_data_addr(image_pointer, &(btp), &(size_line), &(endian));
 	info->image = image;
 	if (!(prepare_fill(info, btp)))
-		return (0);
+		return 0;
 	start_fill(info);
 	return 0;
 }

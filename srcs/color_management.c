@@ -17,5 +17,5 @@ void		put_pixel(char *image, int current, int line, char *color)
 
 int		get_colors(int argc, char **argv, struct info *info)
 {
-	return (1);
+	return 1;
 }
