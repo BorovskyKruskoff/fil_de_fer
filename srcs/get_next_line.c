@@ -1,5 +1,48 @@
 #include "get_next_line.h"
 
+static char		*strnew(size_t size)
+{
+	char	*str;
+	size_t	a = 0;
+
+	if (!(str = (char*)malloc(sizeof(*str) * (size + 1))))
+		return NULL;
+	while (a < (size + 1))
+	{
+		str[a] = 0;
+		a++;
+	}
+	return str;
+}
+
+static char		*strjoin(const char *s1, const char *s2)
+{
+	size_t	count;
+	size_t	b;
+	size_t	a = 0;
+	char	*res;
+
+	if (!s1 || !s2)
+		return NULL;
+	count = strlen(s1) + strlen(s2);
+	if (!(res = strnew(count + 1)))
+		return NULL;
+	while (s1[a] != 0)
+	{
+		res[a] = s1[a];
+		a++;
+	}
+	b = a;
+	a = 0;
+	while (s2[a] != 0)
+	{
+		res[a + b] = s2[a];
+		a++;
+	}
+	return res;
+}
+
+
 static struct buffers	*new_buffer(int fd, struct buffers *buffers)
 {
 	int		a;
@@ -85,7 +128,7 @@ static int	check_fd(struct buffers *t, int fd, char **line)
 	if (!(*line = strnew(sizeof(char) * (BUFF_SIZE + 1))))
 		return -1;
 	b = 0;
-	ft_bzero(*line, BUFF_SIZE + 1);
+	bzero(*line, BUFF_SIZE + 1);
 	if (t->buf[t->rest_index] == 0)
 		return 0;
 	a = t->rest_index;

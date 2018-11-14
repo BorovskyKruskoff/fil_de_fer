@@ -12,7 +12,7 @@ int		display_error(int usage)
 		printf("The window's size is between 200 and 2500\n");
 		return 1;
 	}
-	ft_putstr("error\n");
+	printf("error\n");
 	return 1;
 }
 
