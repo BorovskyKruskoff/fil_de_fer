@@ -55,7 +55,8 @@ struct	info
 	int			x;
 	int			size;
 	int			**tab;
-	int			transition;
+	struct point		actual;
+	struct vectors		is_pos;
 	struct vectors		vectors_hor;
 	struct vectors		vectors_vert;
 	struct vectors		angle;
@@ -67,8 +68,8 @@ struct	info
 	struct color_node	*colorlist;
 };
 
-void	trace(struct point *actual, struct info *info);
-void	put_pixel(char *image, int current, int line, char *color);
+int	trace(struct info *info);
+void	put_pixel(char *image, struct point *actual, char *color);
 double	start_fill(struct info *info);
 double	create_image(struct info *info);
 double	dif(struct info *info, double dir);

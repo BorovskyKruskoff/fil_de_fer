@@ -75,12 +75,12 @@ double			start_fill(struct info *info)
 	info->x = 0;
 	info->decimals.x = 0.0;
 	info->decimals.y = 0.0;
-	info->transition = 0;
 //	todo
 	info->startpoint.line = 10 + info->pos_y;
 	info->startpoint.current = (info->startpoint.line *
 		(3 * WINLEN)) + (info->pos_x * 3);
 	fill_image(info);
+//	mlx_put_image_to_window(info->mlx, info->win, info->image, 0, 0);
 	return 0;
 }
 
@@ -102,5 +102,5 @@ double			create_image(struct info *info)
 	if (!(prepare_fill(info, btp)))
 		return 0;
 	start_fill(info);
-	return 0;
+	return 1;
 }

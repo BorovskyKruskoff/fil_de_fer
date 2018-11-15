@@ -3,6 +3,7 @@
 
 # define BUFF_SIZE 9999
 
+# include <string.h>
 # include <strings.h>
 # include <unistd.h>
 # include <stdlib.h>

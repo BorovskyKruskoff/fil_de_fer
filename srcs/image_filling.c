@@ -31,34 +31,26 @@ double			get_angle(struct info *info, double dir)
 	return result;
 }
 
-void			get_line(struct point *actual, struct info *info)
+static int		get_line(struct point *actual, struct info *info)
 {
 	info->angle.x = info->vectors_hor.x * dif(info, 0) *
 		(float)info->height * cos(info->rot_x) * info->gap;
 	info->angle.y = info->vectors_hor.y * dif(info, 0) *
 		(float)info->height * cos(info->rot_y) * info->gap;
-	trace(actual, info);
+	if (!(trace(info)))
+		return 1;
+	return 0;
 }
 
-void			get_column(struct point *actual, struct info *info)
+static int		get_column(struct point *actual, struct info *info)
 {
-	int		currentsave;
-	int		linesave;
-
-	currentsave = actual->current;
-	linesave = actual->line;
 	info->angle.x = info->vectors_vert.x * dif(info, 1) *
 		(float)info->height * cos(info->rot_x) * info->gap;
 	info->angle.y = info->vectors_vert.y * dif(info, 1) *
 		(float)info->height * cos(info->rot_y) * info->gap;
-	trace(actual, info);
-	if (!(info->transition))
-	{
-		actual->current = currentsave;
-		actual->line = linesave;
-	}
-	else
-		info->transition = 0;
+	if (!(trace(info)))
+		return 1;
+	return 0;
 }
 
 /*
@@ -68,23 +60,25 @@ void			get_column(struct point *actual, struct info *info)
 
 int			fill_image(struct info *info)
 {
-	struct point	*actual;
-
-	actual->current = info->startpoint.current;
-	actual->line = info->startpoint.line;
+	info->actual.current = info->startpoint.current;
+	info->actual.line = info->startpoint.line;
 	while (info->y + 1 < info->size - 1)
 	{
 		info->x = 0;
 		while (info->x + 1 < info->size)
 		{
-			get_line(actual, info);
-			get_column(actual, info);
+			if (!(get_line(&info->actual, info)))
+				return 1;
+			if (!(get_column(&info->actual, info)))
+				return 1;
 			info->x += 1;
 		}
-		info->transition = 1;
-		get_column(&info->startpoint, info);
-		actual->current = info->startpoint.current;
-		actual->line = info->startpoint.line;
+		info->actual.current = info->startpoint.current;
+		info->actual.line = info->startpoint.line;
+		if (!(get_column(&info->actual, info)))
+			return 1;
+		info->startpoint.current = info->actual.current;
+		info->startpoint.line = info->actual.line;
 		info->y += 1;
 	}
 	return 0;
