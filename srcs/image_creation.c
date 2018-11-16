@@ -34,8 +34,8 @@ static double	prepare_fill(struct info *info, int btp)
 	else
 		info->minsize = WINHEIGHT;
 	info->gap = ((info->minsize / 1.2) + info->pos_z) / info->size;
-	info->sizeline = btp * WINLEN;
 	info->btp = btp;
+	info->sizeline = 3 * WINLEN;
 	get_max_min(info);
 	return 1;
 }
@@ -79,8 +79,13 @@ double			start_fill(struct info *info)
 	info->startpoint.line = 10 + info->pos_y;
 	info->startpoint.current = (info->startpoint.line *
 		(3 * WINLEN)) + (info->pos_x * 3);
+
+	printf("gap : %d\nsize : %d\nminsize : %d\n",
+		info->gap, info->size, info->minsize);
+
 	fill_image(info);
-//	mlx_put_image_to_window(info->mlx, info->win, info->image, 0, 0);
+//	mlx_put_image_to_window(info->mlx, info->win,
+//		(void*)info->image, 1, 1);
 	return 0;
 }
 
@@ -96,8 +101,8 @@ double			create_image(struct info *info)
 	size_line = (btp / 8) * WINLEN;
 	endian = 0;
 	image_pointer = mlx_new_image(info->mlx, WINLEN, WINHEIGHT);
-	image =
-	mlx_get_data_addr(image_pointer, &(btp), &(size_line), &(endian));
+	image = mlx_get_data_addr
+		(image_pointer, &(btp), &(size_line), &(endian));
 	info->image = image;
 	if (!(prepare_fill(info, btp)))
 		return 0;

@@ -8,13 +8,22 @@ void	draw(struct info *info, int x, int y, struct vectors *rest)
 	rest->x -= x;
 	rest->y -= y;
 	if (x == 1)
-		info->actual.current += (info->btp * info->is_pos.x);
+		info->actual.current += (3 * info->is_pos.x);
 	if (y == 1)
 	{
-		info->actual.current += (WINLEN * info->btp * info->is_pos.y);
+		info->actual.current += (WINLEN * 3 * info->is_pos.y);
 		info->actual.line += (1 * info->is_pos.y);
 	}
-	put_pixel(info->image, &info->actual, "AAA");
+
+
+	printf("X : %d",(info->actual.current -
+		info->sizeline * info->actual.line) / 3);
+	printf("    Y : %d\n", info->actual.line);
+	mlx_pixel_put(info->mlx, info->win,
+	(info->actual.current - (info->sizeline * info->actual.line)) / 3,
+	info->actual.line, 16777215);
+
+//	put_pixel(info->image, &info->actual, "AAA");
 }
 
 void	prepare_draw_big(struct info *info, struct vectors *rest ,double ratio)
