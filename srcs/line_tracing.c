@@ -16,9 +16,9 @@ void	draw(struct info *info, int x, int y, struct vectors *rest)
 	}
 
 
-	printf("X : %d",(info->actual.current -
-		info->sizeline * info->actual.line) / 3);
-	printf("    Y : %d\n", info->actual.line);
+//	printf("X : %d",(info->actual.current -
+//		info->sizeline * info->actual.line) / 3);
+//	printf("    Y : %d\n", info->actual.line);
 	mlx_pixel_put(info->mlx, info->win,
 	(info->actual.current - (info->sizeline * info->actual.line)) / 3,
 	info->actual.line, 16777215);
