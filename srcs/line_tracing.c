@@ -96,5 +96,5 @@ int	trace(struct info *info)
 	rest->y = info->angle.y + info->decimals.y;
 	prepare_draw(info, rest, ratio);
 	free(rest);
-	return 0;
+	return 1;
 }

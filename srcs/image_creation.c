@@ -73,6 +73,7 @@ double			start_fill(struct info *info)
 	info->vectors_vert.y = cos(info->rot_y) * cos(info->rot_z);
 	info->y = 0;
 	info->x = 0;
+	info->transition = 0;
 	info->decimals.x = 0.0;
 	info->decimals.y = 0.0;
 //	todo
@@ -82,7 +83,8 @@ double			start_fill(struct info *info)
 
 	printf("gap : %lf\nsize : %d\nminsize : %d\n",
 		info->gap, info->size, info->minsize);
-	printf("Start line : %d\n Start current : %d\n", info->startpoint.line, info->startpoint.current);
+	printf("Start line : %d\n Start current : %d\n",
+		info->startpoint.line, info->startpoint.current);
 
 	fill_image(info);
 //	mlx_put_image_to_window(info->mlx, info->win,

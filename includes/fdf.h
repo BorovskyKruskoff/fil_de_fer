@@ -55,6 +55,7 @@ struct	info
 	int			x;
 	int			size;
 	int			**tab;
+	int			transition;
 	struct point		actual;
 	struct vectors		is_pos;
 	struct vectors		vectors_hor;

@@ -37,22 +37,31 @@ static int		get_line(struct point *actual, struct info *info)
 		(float)info->height * sin(info->rot_x)) * info->gap;
 	info->angle.y = (info->vectors_hor.y + dif(info, 0) *
 		(float)info->height * sin(info->rot_y)) * info->gap;
-//	printf("LINE   X = %f,Y = %f\n", info->angle.x, info->angle.y);
 	if (!(trace(info)))
-		return 1;
-	return 0;
+		return 0;
+	return 1;
 }
 
 static int		get_column(struct point *actual, struct info *info)
 {
+	struct point	save;
+
+	save.current = actual->current;
+	save.line = actual->line;
 	info->angle.x = (info->vectors_vert.x + dif(info, 1) *
 		(float)info->height * sin(info->rot_x)) * info->gap;
 	info->angle.y = (info->vectors_vert.y + dif(info, 1) *
 		(float)info->height * sin(info->rot_y)) * info->gap;
-//	printf("COLUMN   X = %f,Y = %f\n", info->angle.x, info->angle.y);
 	if (!(trace(info)))
-		return 1;
-	return 0;
+		return 0;
+	if (!(info->transition))
+	{
+		info->actual.current = save.current;
+		info->actual.line = save.line;
+	}
+	else
+		info->transition = 0;
+	return 1;
 }
 
 /*
@@ -62,7 +71,6 @@ static int		get_column(struct point *actual, struct info *info)
 
 int			fill_image(struct info *info)
 {
-	printf("\n\n%lf\n\n", info->gap);
 	info->actual.current = info->startpoint.current;
 	info->actual.line = info->startpoint.line;
 	while (info->y + 1 < info->size - 1)
@@ -76,6 +84,7 @@ int			fill_image(struct info *info)
 				return 1;
 			info->x += 1;
 		}
+		info->transition = 1;
 		info->actual.current = info->startpoint.current;
 		info->actual.line = info->startpoint.line;
 		if (!(get_column(&info->actual, info)))
