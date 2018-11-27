@@ -35,24 +35,29 @@ void	prepare_draw_big(struct info *info, struct vectors *rest ,double ratio)
 
 	while (x_total < rest->x && y_total < rest->y)
 	{
-		x += ratio;
-		y += 1;
-		while (x >= 1.0 && x_total < rest->x)
-		{
-			draw(info, 1, 0, rest);
-			x_total += 1;
-		}
-		while (y >= 1.0 && y_total < rest->y)
-		{
-			draw(info, 0, 1, rest);
-			y_total += 1;
-		}
+		printf("x = %lf\ny = %lf\n", x, y);
+		x += info->angle.x;
+		y += info->angle.y;
 		while (x >= 1.0 && x_total < rest->x &&
 			y >= 1.0 && y_total < rest->y)
 		{
 			draw(info, 1, 1, rest);
 			x_total += 1;
 			y_total += 1;
+			x -= 1;
+			y -= 1;
+		}
+		while (x >= 1.0 && x_total < rest->x)
+		{
+			draw(info, 1, 0, rest);
+			x_total += 1;
+			x -= 1;
+		}
+		while (y >= 1.0 && y_total < rest->y)
+		{
+			draw(info, 0, 1, rest);
+			y_total += 1;
+			y -= 1;
 		}
 	}
 }
@@ -92,8 +97,8 @@ int	trace(struct info *info)
 		info->angle.y *= -1;
 	}
 	ratio = info->angle.x / info->angle.y;
-	rest->x = info->angle.x + info->decimals.x;
-	rest->y = info->angle.y + info->decimals.y;
+	rest->x = (info->angle.x * info->gap) + info->decimals.x;
+	rest->y = (info->angle.y * info->gap) + info->decimals.y;
 	prepare_draw(info, rest, ratio);
 	free(rest);
 	return 1;

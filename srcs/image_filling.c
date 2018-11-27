@@ -33,10 +33,10 @@ double			get_angle(struct info *info, double dir)
 
 static int		get_line(struct point *actual, struct info *info)
 {
-	info->angle.x = (info->vectors_hor.x + dif(info, 0) *
-		(float)info->height * sin(info->rot_x)) * info->gap;
-	info->angle.y = (info->vectors_hor.y + dif(info, 0) *
-		(float)info->height * sin(info->rot_y)) * info->gap;
+	info->angle.x = info->vectors_hor.x + dif(info, 0) *
+		(float)info->height * sin(info->rot_x);
+	info->angle.y = info->vectors_hor.y + dif(info, 0) *
+		(float)info->height * sin(info->rot_y);
 	if (!(trace(info)))
 		return 0;
 	return 1;
@@ -48,10 +48,10 @@ static int		get_column(struct point *actual, struct info *info)
 
 	save.current = actual->current;
 	save.line = actual->line;
-	info->angle.x = (info->vectors_vert.x + dif(info, 1) *
-		(float)info->height * sin(info->rot_x)) * info->gap;
-	info->angle.y = (info->vectors_vert.y + dif(info, 1) *
-		(float)info->height * sin(info->rot_y)) * info->gap;
+	info->angle.x = info->vectors_vert.x + dif(info, 1) *
+		(float)info->height * sin(info->rot_x);
+	info->angle.y = info->vectors_vert.y + dif(info, 1) *
+		(float)info->height * sin(info->rot_y);
 	if (!(trace(info)))
 		return 0;
 	if (!(info->transition))

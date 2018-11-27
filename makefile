@@ -25,8 +25,6 @@ $(NAME): $(SRC)
 
 clean:
 	rm -fv $(OBJ)
-
-fclean: clean
 	rm -fv $(NAME)
 
 re: fclean all

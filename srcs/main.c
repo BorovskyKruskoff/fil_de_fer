@@ -1,6 +1,6 @@
 #include "fdf.h"
 
-static int		key_management(int keycode, void *param)
+static int key_management(int keycode, void *param)
 {
 	struct info	*info;
 
@@ -31,7 +31,7 @@ static int		key_management(int keycode, void *param)
 	return 0;
 }
 
-int				main(int argc, char **argv)
+int main(int argc, char **argv)
 {
 	struct info	*info;
 	void		*mlx;
@@ -49,7 +49,7 @@ int				main(int argc, char **argv)
 	info->rot_x = 0.0;
 	info->rot_y = 0.0;
 	info->rot_z = 0.0;
-	info->pos_x = 0;
+	info->pos_x = 200;
 	info->pos_y = 0;
 	info->pos_z = 0;
 	info->height = 1;
