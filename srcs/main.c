@@ -1,11 +1,19 @@
 #include "fdf.h"
 
+//static void remap(struct info *info)
+//{
+//	printf("Now remapping. Press Q, W, E, A, S, D in this order\n");
+//	
+//}
+
 static int key_management(int keycode, void *param)
 {
 	struct info	*info;
 
 	info = (struct info*)param;
 	printf("The key pressed is : %d\n.", keycode);
+//	if (keycode == 112)
+//		remap(info);
 	if (keycode == 0)
 		printf("A !\n");
 	if (keycode == 13)
