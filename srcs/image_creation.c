@@ -1,11 +1,11 @@
 #include "fdf.h"
 
-static void	get_max_min(struct info *info)
+static void get_max_min(struct info *info)
 {
-	int		max;
-	int		min;
-	int		a;
-	int		b;
+	int max;
+	int min;
+	int a;
+	int b;
 
 	max = -2147483648;
 	min = 2147483647;
@@ -27,7 +27,7 @@ static void	get_max_min(struct info *info)
 	info->max = (double)max;
 }
 
-static double	prepare_fill(struct info *info, int btp)
+static double prepare_fill(struct info *info, int btp)
 {
 	if (WINHEIGHT > WINLEN)
 		info->minsize = WINLEN;
@@ -40,7 +40,7 @@ static double	prepare_fill(struct info *info, int btp)
 	return 1;
 }
 
-static void	update_info(struct info *info)
+static void update_info(struct info *info)
 {
 	if (info->rot_x >= M_PI)
 		info->rot_x -= M_PI;
@@ -64,7 +64,7 @@ static void	update_info(struct info *info)
 		info->pos_y += 100;
 }
 
-double			start_fill(struct info *info)
+double start_fill(struct info *info)
 {
 	update_info(info);
 	info->vectors_hor.x = cos(info->rot_x) * cos(info->rot_z);
@@ -87,26 +87,23 @@ double			start_fill(struct info *info)
 		info->startpoint.line, info->startpoint.current);
 
 	fill_image(info);
-	mlx_put_image_to_window(info->mlx, info->win,
-		(void*)info->image, 1, 1);
+	mlx_put_image_to_window((void*)info->mlx, (void*)info->win,
+		(void*)info->image_pointer, 0, 0);
 	return 0;
 }
 
 double			create_image(struct info *info)
 {
-	void	*image_pointer;
-	char	*image;
-	int		size_line;
-	int		endian;
-	int		btp;
+	int size_line;
+	int endian;
+	int btp;
 
 	btp = 8 * 3;
 	size_line = (btp / 8) * WINLEN;
 	endian = 0;
-	image_pointer = mlx_new_image(info->mlx, WINLEN, WINHEIGHT);
-	image = mlx_get_data_addr
-		(image_pointer, &(btp), &(size_line), &(endian));
-	info->image = image;
+	info->image_pointer = mlx_new_image(info->mlx, WINLEN, WINHEIGHT);
+	info->image = mlx_get_data_addr
+		(info->image_pointer, &(btp), &(size_line), &(endian));
 	if (!(prepare_fill(info, btp)))
 		return 0;
 	start_fill(info);

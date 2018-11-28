@@ -8,13 +8,14 @@ void		put_pixel(char *image, struct point *actual, char *color)
 	if (actual->current >= sizeline * actual->line &&
 		actual->current <= sizeline * (actual->line + 1))
 	{
-		image[actual->current] = color[0];
+		image[actual->current] = (char)255;
 		actual->current++;
-		image[actual->current] = color[1];
+		image[actual->current] = (char)255;
 		actual->current++;
-		image[actual->current] = color[2];
+		image[actual->current] = (char)255;
 		actual->current++;
 	}
+	printf("%d\n", sizeof(char));
 }
 
 int		get_colors(int argc, char **argv, struct info *info)

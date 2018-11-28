@@ -65,6 +65,7 @@ struct info
 	struct point startpoint;
 	void *mlx;
 	void *win;
+	void *image_pointer;
 	char *image;
 	struct color_node *colorlist;
 };

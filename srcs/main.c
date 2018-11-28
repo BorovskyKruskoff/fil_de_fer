@@ -57,7 +57,7 @@ int main(int argc, char **argv)
 	win = mlx_new_window(mlx, WINLEN, WINHEIGHT, "FdF ~ ggay");
 	info->mlx = mlx;
 	info->win = win;
-	info->rot_x = 0.0;
+	info->rot_x = M_PI / 4;
 	info->rot_y = 0.0;
 	info->rot_z = 0.0;
 	info->pos_x = 200;
