@@ -87,8 +87,8 @@ double			start_fill(struct info *info)
 		info->startpoint.line, info->startpoint.current);
 
 	fill_image(info);
-//	mlx_put_image_to_window(info->mlx, info->win,
-//		(void*)info->image, 1, 1);
+	mlx_put_image_to_window(info->mlx, info->win,
+		(void*)info->image, 1, 1);
 	return 0;
 }
 

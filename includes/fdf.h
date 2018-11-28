@@ -46,12 +46,6 @@ struct info
 	double rot_z;
 	double height;
 	double gap;
-	int Q;
-	int W;
-	int E;
-	int A;
-	int S;
-	int D;
 	int minsize;
 	int btp;
 	int sizeline;

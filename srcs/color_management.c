@@ -6,7 +6,7 @@ void		put_pixel(char *image, struct point *actual, char *color)
 
 	sizeline = 3 * WINLEN;
 	if (actual->current >= sizeline * actual->line &&
-		actual->current <= sizeline * actual->line + 1)
+		actual->current <= sizeline * (actual->line + 1))
 	{
 		image[actual->current] = color[0];
 		actual->current++;
