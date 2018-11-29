@@ -71,7 +71,7 @@ struct info
 };
 
 int trace(struct info *info);
-void put_pixel(char *image, struct point *actual, char *color);
+void put_pixel(struct info *info, struct point *actual, int color);
 double start_fill(struct info *info);
 double create_image(struct info *info);
 double dif(struct info *info, double dir);

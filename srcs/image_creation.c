@@ -99,7 +99,7 @@ double			create_image(struct info *info)
 	int btp;
 
 	btp = 8 * 3;
-	size_line = (btp / 8) * WINLEN;
+	size_line = WINLEN * 3;
 	endian = 0;
 	info->image_pointer = mlx_new_image(info->mlx, WINLEN, WINHEIGHT);
 	info->image = mlx_get_data_addr

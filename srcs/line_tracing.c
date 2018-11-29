@@ -23,7 +23,7 @@ void	draw(struct info *info, int x, int y, struct vectors *rest)
 //	(info->actual.current - (info->sizeline * info->actual.line)) / 3,
 //	info->actual.line, 16777215);
 //
-	put_pixel(info->image, &info->actual, "AAA");
+	put_pixel(info, &info->actual, 16777215);
 }
 
 void	prepare_draw_big(struct info *info, struct vectors *rest ,double ratio)
@@ -33,9 +33,11 @@ void	prepare_draw_big(struct info *info, struct vectors *rest ,double ratio)
 	double	x;
 	double	y;
 
+	x_total = 0.0;
+	y_total = 0.0;
 	while (x_total < rest->x && y_total < rest->y)
 	{
-		printf("x = %lf\ny = %lf\n", x, y);
+		printf("X = %lf\nY = %lf\n", x, y);
 		x += info->angle.x;
 		y += info->angle.y;
 		while (x >= 1.0 && x_total < rest->x &&
@@ -84,6 +86,8 @@ int	trace(struct info *info)
 
 	if (!(rest = (struct vectors*)malloc(sizeof(struct vectors))))
 		return 1;
+	rest->x = 0.0;
+	rest->y = 0.0;
 	info->is_pos.x = 1;
 	info->is_pos.y = 1;
 	if (info->angle.x < 0.0)

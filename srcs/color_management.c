@@ -1,21 +1,16 @@
 #include "fdf.h"
 
-void		put_pixel(char *image, struct point *actual, char *color)
+void		put_pixel(struct info *info, struct point *actual, int color)
 {
 	int		sizeline;
 
 	sizeline = 3 * WINLEN;
-	if (actual->current >= sizeline * actual->line &&
+	if (actual->current >= sizeline * actual->line && actual->line >= 0 &&
 		actual->current <= sizeline * (actual->line + 1))
 	{
-		image[actual->current] = (char)255;
-		actual->current++;
-		image[actual->current] = (char)255;
-		actual->current++;
-		image[actual->current] = (char)255;
-		actual->current++;
+		info->image[actual->current] =
+			(char) mlx_get_color_value(info->mlx, color);
 	}
-	printf("%d\n", sizeof(char));
 }
 
 int		get_colors(int argc, char **argv, struct info *info)
