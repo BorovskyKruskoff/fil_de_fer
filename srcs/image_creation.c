@@ -42,18 +42,18 @@ static double prepare_fill(struct info *info, int btp)
 
 static void update_info(struct info *info)
 {
-	if (info->rot_x >= M_PI)
-		info->rot_x -= M_PI;
+	if (info->rot_x >= M_PI * 2)
+		info->rot_x -= M_PI * 2;
 	if (info->rot_x < 0)
-		info->rot_x += M_PI;
-	if (info->rot_y >= M_PI)
-		info->rot_y -= M_PI;
+		info->rot_x += M_PI * 2;
+	if (info->rot_y >= M_PI * 2)
+		info->rot_y -= M_PI * 2;
 	if (info->rot_y < 0)
-		info->rot_y += M_PI;
-	if (info->rot_z >= M_PI)
-		info->rot_z -= M_PI;
+		info->rot_y += M_PI * 2;
+	if (info->rot_z >= M_PI * 2)
+		info->rot_z -= M_PI * 2;
 	if (info->rot_z < 0)
-		info->rot_z += M_PI;
+		info->rot_z += M_PI * 2;
 	if (info->pos_x >= 2500)
 		info->pos_x -= 100;
 	if (info->pos_x <= -2500)
@@ -101,7 +101,7 @@ double			create_image(struct info *info)
 	btp = 8 * 3;
 	size_line = WINLEN * 3;
 	endian = 0;
-	info->image_pointer = mlx_new_image(info->mlx, WINLEN, WINHEIGHT);
+	info->image_pointer = mlx_new_image(info->mlx, WINHEIGHT, WINLEN);
 	info->image = mlx_get_data_addr
 		(info->image_pointer, &(btp), &(size_line), &(endian));
 	if (!(prepare_fill(info, btp)))
