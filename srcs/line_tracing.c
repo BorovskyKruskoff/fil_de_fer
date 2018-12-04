@@ -7,6 +7,7 @@ void	draw(struct info *info, int x, int y, struct vectors *rest)
 {
 	rest->x -= x;
 	rest->y -= y;
+	put_pixel(info, &info->actual, 16777215);
 	if (x == 1)
 		info->actual.current += (3 * info->is_pos.x);
 	if (y == 1)
@@ -16,14 +17,10 @@ void	draw(struct info *info, int x, int y, struct vectors *rest)
 	}
 
 
-	printf("X : %d",(info->actual.current -
-		info->sizeline * info->actual.line) / 3);
-	printf("    Y : %d\n", info->actual.line);
 //	mlx_pixel_put(info->mlx, info->win,
 //	(info->actual.current - (info->sizeline * info->actual.line)) / 3,
 //	info->actual.line, 16777215);
 //
-	put_pixel(info, &info->actual, 16777215);
 }
 
 void	prepare_draw_big(struct info *info, struct vectors *rest ,double ratio)
@@ -37,7 +34,6 @@ void	prepare_draw_big(struct info *info, struct vectors *rest ,double ratio)
 	y_total = 0.0;
 	while (x_total < rest->x && y_total < rest->y)
 	{
-		printf("X = %lf\nY = %lf\n", x, y);
 		x += info->angle.x;
 		y += info->angle.y;
 		while (x >= 1.0 && x_total < rest->x &&

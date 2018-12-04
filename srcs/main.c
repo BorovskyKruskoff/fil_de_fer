@@ -24,9 +24,9 @@ static void other_keys(int keycode, struct info *info)
 	if (keycode == 114)
 		printf("Reset !\n");
 	if (keycode == 65361)
-		info->pos_x -= 10;
+		info->pos_x -= 1;
 	if (keycode == 65363)
-		info->pos_x += 10;
+		info->pos_x += 1;
 	if (keycode == 65364)
 		info->pos_y += 10;
 	if (keycode == 65362)

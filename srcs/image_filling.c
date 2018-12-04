@@ -33,6 +33,8 @@ double			get_angle(struct info *info, double dir)
 
 static int		get_line(struct point *actual, struct info *info)
 {
+//	printf("Drawing a line at X = %d Y = %d\n\n"
+//		, actual->current - (actual->line * WINLEN * 3), actual->line);
 	info->angle.x = info->vectors_hor.x + dif(info, 0) *
 		(float)info->height * sin(info->rot_x);
 	info->angle.y = info->vectors_hor.y + dif(info, 0) *
@@ -48,6 +50,8 @@ static int		get_column(struct point *actual, struct info *info)
 
 	save.current = actual->current;
 	save.line = actual->line;
+//	printf("Drawing a column at X = %d Y = %d\n\n"
+//		, actual->current - (actual->line * WINLEN * 3), actual->line);
 	info->angle.x = info->vectors_vert.x + dif(info, 1) *
 		(float)info->height * sin(info->rot_x);
 	info->angle.y = info->vectors_vert.y + dif(info, 1) *
@@ -93,5 +97,6 @@ int			fill_image(struct info *info)
 		info->startpoint.line = info->actual.line;
 		info->y += 1;
 	}
+	printf("btp is %d, sizeline is %d\n", info->btp, info->sizeline);
 	return 0;
 }

@@ -34,7 +34,6 @@ static double prepare_fill(struct info *info, int btp)
 	else
 		info->minsize = WINHEIGHT;
 	info->gap = ((info->minsize / 1.2) + info->pos_z) / info->size;
-	info->btp = btp;
 	info->sizeline = 3 * WINLEN;
 	get_max_min(info);
 	return 1;
@@ -98,12 +97,17 @@ double			create_image(struct info *info)
 	int endian;
 	int btp;
 
-	btp = 8 * 3;
-	size_line = WINLEN * 3;
+	btp = 24;
+	size_line = WINLEN * 4;
 	endian = 0;
-	info->image_pointer = mlx_new_image(info->mlx, WINHEIGHT, WINLEN);
+	info->image_pointer = mlx_new_image(info->mlx, WINLEN, WINHEIGHT);
 	info->image = mlx_get_data_addr
 		(info->image_pointer, &(btp), &(size_line), &(endian));
+	info->btp = btp;
+	info->sizeline = size_line;
+	
+	printf("%d\n", info->sizeline);
+	printf("%d\n", info->btp);
 	if (!(prepare_fill(info, btp)))
 		return 0;
 	start_fill(info);
