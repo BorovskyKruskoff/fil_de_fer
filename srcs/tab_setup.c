@@ -1,6 +1,6 @@
 #include "fdf.h"
 
-static int	*fill_tab(int *tab, char *str, int size)
+static int *fill_tab(int *tab, char *str, int size)
 {
 	int		a = 0;
 	int		b = 0;
@@ -23,7 +23,7 @@ static int	*fill_tab(int *tab, char *str, int size)
 	return tab;
 }
 
-static int	*create_empty(int *tab, int size)
+static int *create_empty(int *tab, int size)
 {
 	int	c = 0;
 
@@ -37,7 +37,7 @@ static int	*create_empty(int *tab, int size)
 	return tab;
 }
 
-int		create_tab(char *str, struct info *info, int size)
+int create_tab(char *str, struct info *info, int size)
 {
 	int		a = 0;
 	int		fd;
@@ -67,7 +67,7 @@ int		create_tab(char *str, struct info *info, int size)
 	return 1;
 }
 
-static int	get_linesize(char *line)
+static int get_linesize(char *line)
 {
 	int		a = 0;
 	int		b = 0;
@@ -88,7 +88,7 @@ static int	get_linesize(char *line)
 	return b;
 }
 
-int			init_get_size(char *str)
+int init_get_size(char *str)
 {
 	int		ysize = 0;
 	int		size = 0;

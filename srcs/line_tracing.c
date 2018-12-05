@@ -9,10 +9,10 @@ void	draw(struct info *info, int x, int y, struct vectors *rest)
 	rest->y -= y;
 	put_pixel(info, &info->actual, 16777215);
 	if (x == 1)
-		info->actual.current += (3 * info->is_pos.x);
+		info->actual.current += (4 * info->is_pos.x);
 	if (y == 1)
 	{
-		info->actual.current += (WINLEN * 3 * info->is_pos.y);
+		info->actual.current += (WINLEN * 4 * info->is_pos.y);
 		info->actual.line += (1 * info->is_pos.y);
 	}
 

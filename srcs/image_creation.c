@@ -34,7 +34,7 @@ static double prepare_fill(struct info *info, int btp)
 	else
 		info->minsize = WINHEIGHT;
 	info->gap = ((info->minsize / 1.2) + info->pos_z) / info->size;
-	info->sizeline = 3 * WINLEN;
+	info->sizeline = 4 * WINLEN;
 	get_max_min(info);
 	return 1;
 }
@@ -78,7 +78,7 @@ double start_fill(struct info *info)
 //	todo
 	info->startpoint.line = 10 + info->pos_y;
 	info->startpoint.current = (info->startpoint.line *
-		(3 * WINLEN)) + (info->pos_x * 3);
+		(4 * WINLEN)) + (info->pos_x * 4);
 
 	printf("gap : %lf\nsize : %d\nminsize : %d\n",
 		info->gap, info->size, info->minsize);

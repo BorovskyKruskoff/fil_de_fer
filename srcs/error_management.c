@@ -1,6 +1,6 @@
 #include "fdf.h"
 
-int		display_error(int usage)
+int display_error(int usage)
 {
 	if (usage == 1)
 	{
@@ -16,7 +16,7 @@ int		display_error(int usage)
 	return 1;
 }
 
-int		error_management(char **argv, int argc, struct info *info)
+int error_management(char **argv, int argc, struct info *info)
 {
 	if (argc == 1)
 		return display_error(1);
@@ -29,7 +29,7 @@ int		error_management(char **argv, int argc, struct info *info)
 	return 0;
 }
 
-int		check_winsize(void)
+int check_winsize(void)
 {
 	if (WINLEN > 2500 || WINHEIGHT > 2500)
 		return display_error(2);

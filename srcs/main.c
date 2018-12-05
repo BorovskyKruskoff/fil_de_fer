@@ -6,12 +6,12 @@ static int empty_window(struct info *info)
 
 	actual.current = 0;
 	actual.line = 0;
-	while (actual.current < WINLEN * WINHEIGHT * 3)
+	while (actual.current < WINLEN * WINHEIGHT * 4)
 	{
-		while (actual.current < WINLEN * 3 * (actual.line + 1))
+		while (actual.current < WINLEN * 4 * (actual.line + 1))
 		{
 			put_pixel(info, &actual, 0);
-			actual.current += 3;
+			actual.current += 4;
 		}
 		actual.line += 1;
 	}
@@ -19,14 +19,25 @@ static int empty_window(struct info *info)
 		return 1;
 }
 
+static void reset_coordinates(struct info *info)
+{
+	info->rot_x = 0.0;
+	info->rot_y = 0.0;
+	info->rot_z = 0.0;
+	info->pos_x = 0;
+	info->pos_y = 0;
+	info->pos_z = 0;
+	info->height = 1;
+}
+
 static void other_keys(int keycode, struct info *info)
 {
 	if (keycode == 114)
-		printf("Reset !\n");
+		reset_coordinates(info);
 	if (keycode == 65361)
-		info->pos_x -= 1;
+		info->pos_x -= 10;
 	if (keycode == 65363)
-		info->pos_x += 1;
+		info->pos_x += 10;
 	if (keycode == 65364)
 		info->pos_y += 10;
 	if (keycode == 65362)
@@ -75,13 +86,7 @@ int main(int argc, char **argv)
 	win = mlx_new_window(mlx, WINLEN, WINHEIGHT, "FdF ~ ggay");
 	info->mlx = mlx;
 	info->win = win;
-	info->rot_x = 0.0;
-	info->rot_y = 0.0;
-	info->rot_z = 0.0;
-	info->pos_x = 0;
-	info->pos_y = 0;
-	info->pos_z = 0;
-	info->height = 1;
+	reset_coordinates(info);
 	if (!(create_image(info)))
 		return (display_error(0));
 	mlx_key_hook(win, key_management, (void*)info);
