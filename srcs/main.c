@@ -27,7 +27,7 @@ static void reset_coordinates(struct info *info)
 	info->pos_x = 0;
 	info->pos_y = 0;
 	info->pos_z = 0;
-	info->height = 1;
+	info->height = 1.0;
 }
 
 static void other_keys(int keycode, struct info *info)

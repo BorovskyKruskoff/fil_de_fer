@@ -80,10 +80,10 @@ double start_fill(struct info *info)
 	info->startpoint.current = (info->startpoint.line *
 		(4 * WINLEN)) + (info->pos_x * 4);
 
-	printf("gap : %lf\nsize : %d\nminsize : %d\n",
-		info->gap, info->size, info->minsize);
-	printf("Start line : %d\n Start current : %d\n",
-		info->startpoint.line, info->startpoint.current);
+//	printf("gap : %lf\nsize : %d\nminsize : %d\n",
+//		info->gap, info->size, info->minsize);
+//	printf("Start line : %d\n Start current : %d\n",
+//		info->startpoint.line, info->startpoint.current);
 
 	fill_image(info);
 	mlx_put_image_to_window((void*)info->mlx, (void*)info->win,
@@ -106,8 +106,8 @@ double			create_image(struct info *info)
 	info->btp = btp;
 	info->sizeline = size_line;
 	
-	printf("%d\n", info->sizeline);
-	printf("%d\n", info->btp);
+//	printf("%d\n", info->sizeline);
+//	printf("%d\n", info->btp);
 	if (!(prepare_fill(info, btp)))
 		return 0;
 	start_fill(info);
