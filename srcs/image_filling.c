@@ -11,12 +11,12 @@ double			dif(struct info *info, double dir)
 	int	b = info->x;
 	if (dir == 0)
 	{
-		printf("Right : %d\n", info->tab[a][b + 1] - info->tab[a][b]);
+//		printf("Right : %d\n", info->tab[a][b + 1] - info->tab[a][b]);
 		return (double)(info->tab[a][b + 1] - info->tab[a][b]);
 	}
 	else
 	{
-		printf("Down : %d\n", info->tab[a + 1][b] - info->tab[a][b]);
+//		printf("Down : %d\n", info->tab[a + 1][b] - info->tab[a][b]);
 		return (double)(info->tab[a + 1][b] - info->tab[a][b]);
 	}
 }
@@ -105,6 +105,5 @@ int			fill_image(struct info *info)
 		info->startpoint.line = info->actual.line;
 		info->y += 1;
 	}
-	printf("btp is %d, sizeline is %d\n", info->btp, info->sizeline);
 	return 0;
 }

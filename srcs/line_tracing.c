@@ -80,6 +80,7 @@ int	trace(struct info *info)
 	struct vectors	*rest;
 	double		ratio;
 
+//	printf("X = %f   Y = %f\n", info->angle.x, info->angle.y);
 	if (!(rest = (struct vectors*)malloc(sizeof(struct vectors))))
 		return 1;
 	rest->x = 0.0;

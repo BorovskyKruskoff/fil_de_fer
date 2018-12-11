@@ -2,7 +2,7 @@
 # define FDF_H
 
 # ifndef M_PI
-#  define M_PI 3.14
+#  define M_PI 3.1415926535
 # endif
 
 # include "get_next_line.h"

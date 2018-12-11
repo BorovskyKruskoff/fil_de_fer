@@ -35,13 +35,13 @@ static void other_keys(int keycode, struct info *info)
 	if (keycode == 114)
 		reset_coordinates(info);
 	if (keycode == 65361)
-		info->pos_x -= 10;
+		info->pos_x -= 25;
 	if (keycode == 65363)
-		info->pos_x += 10;
+		info->pos_x += 25;
 	if (keycode == 65364)
-		info->pos_y += 10;
+		info->pos_y += 25;
 	if (keycode == 65362)
-		info->pos_y -= 10;
+		info->pos_y -= 25;
 	if (keycode == 65307)
 		exit(0);
 }
@@ -53,17 +53,17 @@ static int key_management(int keycode, void *param)
 	info = (struct info*)param;
 	printf("The key pressed is : %d\n.", keycode);
 	if (keycode == 113)
-		info->rot_z -= M_PI / 8;
+		info->rot_z += M_PI / 16;
 	else if (keycode == 119)
-		info->rot_y += M_PI / 8;
+		info->rot_y += M_PI / 16;
 	else if (keycode == 101)
-		info->rot_z += M_PI / 8;
+		info->rot_z -= M_PI / 16;
 	else if (keycode == 97)
-		info->rot_x -= M_PI / 8;
+		info->rot_x -= M_PI / 16;
 	else if (keycode == 115)
-		info->rot_y -= M_PI / 8;
+		info->rot_y -= M_PI / 16;
 	else if (keycode == 100)
-		info->rot_x += M_PI / 8;
+		info->rot_x += M_PI / 16;
 	else
 		other_keys(keycode, info);
 	if (!(empty_window(info)))
