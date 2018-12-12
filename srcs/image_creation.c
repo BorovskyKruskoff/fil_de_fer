@@ -65,32 +65,29 @@ static void update_info(struct info *info)
 
 double start_fill(struct info *info)
 {
+	int line_angle = (WINHEIGHT / 2) * cos(info->rot_z - M_PI * 0.75);
+	int current_angle = (WINLEN / 2) * cos(info->rot_z - M_PI * 1.25);
+
 	update_info(info);
 	info->vectors_hor.x = cos(info->rot_x) * cos(info->rot_z);
 	info->vectors_hor.y = cos(info->rot_x) * sin(info->rot_z + M_PI);
 	info->vectors_vert.x = cos(info->rot_y) * sin(info->rot_z);
 	info->vectors_vert.y = cos(info->rot_y) * cos(info->rot_z);
-	printf("HX = %f HY = %f\n",info->vectors_hor.x,info->vectors_hor.y);
-	printf("VX = %f VY = %f\n",info->vectors_vert.x,info->vectors_vert.y);
+//	printf("HX = %f HY = %f\n",info->vectors_hor.x,info->vectors_hor.y);
+//	printf("VX = %f VY = %f\n",info->vectors_vert.x,info->vectors_vert.y);
 	info->y = 0;
 	info->x = 0;
 	info->transition = 0;
 	info->decimals.x = 0.0;
 	info->decimals.y = 0.0;
-//	todo
-	info->startpoint.line = (float)(WINHEIGHT / 2) + (WINHEIGHT / 2)
-		* cos(info->rot_z - M_PI * 0.75) + info->pos_y;
-	info->startpoint.current = ((float)(WINLEN / 2) + (WINLEN / 2)
-		* cos(info->rot_z - M_PI * 1.25)) * 4 + (info->startpoint.line *
-		(4 * WINLEN)) + (info->pos_x * 4);
+	info->startpoint.line = (WINHEIGHT / 2) + line_angle + info->pos_y;
+	info->startpoint.current = ((WINLEN / 2) + current_angle) * 4
+		+ (info->startpoint.line * 4 * WINLEN) + (info->pos_x * 4);
 
 //	printf("gap : %lf\nsize : %d\nminsize : %d\n",
 //		info->gap, info->size, info->minsize);
-//	printf("Start line : %f\n Start current : %f\n",
-//		(WINHEIGHT / 2) + (WINHEIGHT / 2)
-//		* cos(info->rot_z - M_PI * 0.75),
-//		(WINLEN / 2) + (WINLEN / 2)
-//		* cos(info->rot_z - M_PI * 1.25));
+//	printf("Line : %d\n Current : %d\n",
+//		info->startpoint.line, info->startpoint.current);
 	fill_image(info);
 	mlx_put_image_to_window((void*)info->mlx, (void*)info->win,
 		(void*)info->image_pointer, 0, 0);

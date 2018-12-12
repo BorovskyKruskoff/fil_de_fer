@@ -87,9 +87,10 @@ int main(int argc, char **argv)
 	info->mlx = mlx;
 	info->win = win;
 	reset_coordinates(info);
+	mlx_key_hook(win, key_management, (void*)info);
 	if (!(create_image(info)))
 		return (display_error(0));
-	mlx_key_hook(win, key_management, (void*)info);
+//	mlx_key_hook(win, key_management, (void*)info);
 	mlx_loop(mlx);
 	return 0;
 }

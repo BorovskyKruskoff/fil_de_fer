@@ -104,6 +104,7 @@ int			fill_image(struct info *info)
 		info->startpoint.current = info->actual.current;
 		info->startpoint.line = info->actual.line;
 		info->y += 1;
+//		mlx_loop(mlx);
 	}
 	return 0;
 }
