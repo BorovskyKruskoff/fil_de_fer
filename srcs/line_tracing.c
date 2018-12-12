@@ -23,15 +23,35 @@ void	draw(struct info *info, int x, int y, struct vectors *rest)
 //
 }
 
-void	prepare_draw_big(struct info *info, struct vectors *rest ,double ratio)
+void	prepare_draw_big(struct info *info, struct vectors *rest)
 {
-	double	x_total;
-	double	y_total;
-	double	x;
-	double	y;
+	double x = 0.0;
+	double y = 0.0;
 
-	x_total = 0.0;
-	y_total = 0.0;
+	while (rest->x >= (info->angle.x / info->angle.y) && rest->y >= 1)
+	{
+		x += info->angle.x / info->angle.y;
+		y += 1;
+		if (x == y)
+		{
+			draw(info, 1, 1, rest);
+			x -= 1;
+			y -= 1;
+		}	
+		while (x >= 1)
+		{
+			draw(info, 1, 0, rest);
+			x -= 1;
+		}
+		draw(info, 0, 1, rest);
+		y -= 1;
+	}
+	while (rest->x >= 1)
+	{
+		draw(info, 1, 0, rest);
+		x -= 1;
+	}
+/*
 	while (x_total < rest->x && y_total < rest->y)
 	{
 		x += info->angle.x;
@@ -58,12 +78,13 @@ void	prepare_draw_big(struct info *info, struct vectors *rest ,double ratio)
 			y -= 1;
 		}
 	}
+*/
 }
 
- void	prepare_draw(struct info *info, struct vectors *rest, double ratio)
+ void	prepare_draw(struct info *info, struct vectors *rest)
 {
 	if (rest->x >= 1.0 && rest->y >= 1.0)
-		prepare_draw_big(info, rest, ratio);
+		prepare_draw_big(info, rest);
 	else
 	{
 		while(rest->x >= 1.0)
@@ -78,7 +99,6 @@ void	prepare_draw_big(struct info *info, struct vectors *rest ,double ratio)
 int	trace(struct info *info)
 {
 	struct vectors	*rest;
-	double		ratio;
 
 //	printf("X = %f   Y = %f\n", info->angle.x, info->angle.y);
 	if (!(rest = (struct vectors*)malloc(sizeof(struct vectors))))
@@ -97,10 +117,9 @@ int	trace(struct info *info)
 		info->is_pos.y = -1;
 		info->angle.y *= -1;
 	}
-	ratio = info->angle.x / info->angle.y;
 	rest->x = (info->angle.x * info->gap) + info->decimals.x;
 	rest->y = (info->angle.y * info->gap) + info->decimals.y;
-	prepare_draw(info, rest, ratio);
+	prepare_draw(info, rest);
 	free(rest);
 	return 1;
 }

@@ -42,6 +42,10 @@ static void other_keys(int keycode, struct info *info)
 		info->pos_y += 25;
 	if (keycode == 65362)
 		info->pos_y -= 25;
+	if (keycode == 65451)
+		info->height += 0.2;
+	if (keycode == 65453)
+		info->height -= 0.2;
 	if (keycode == 65307)
 		exit(0);
 }
