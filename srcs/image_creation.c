@@ -73,10 +73,10 @@ double start_fill(struct info *info)
 	info->vectors_hor.y = cos(info->rot_x) * sin(info->rot_z + M_PI);
 	info->vectors_vert.x = cos(info->rot_y) * sin(info->rot_z);
 	info->vectors_vert.y = cos(info->rot_y) * cos(info->rot_z);
-//	printf("HX = %f HY = %f\n",info->vectors_hor.x,info->vectors_hor.y);
-//	printf("VX = %f VY = %f\n",info->vectors_vert.x,info->vectors_vert.y);
 	info->y = 0;
 	info->x = 0;
+	info->rest.x = 0.0;
+	info->rest.y = 0.0;
 	info->transition = 0;
 	info->decimals.x = 0.0;
 	info->decimals.y = 0.0;
@@ -84,10 +84,6 @@ double start_fill(struct info *info)
 	info->startpoint.current = ((WINLEN / 2) + current_angle) * 4
 		+ (info->startpoint.line * 4 * WINLEN) + (info->pos_x * 4);
 
-//	printf("gap : %lf\nsize : %d\nminsize : %d\n",
-//		info->gap, info->size, info->minsize);
-//	printf("Line : %d\n Current : %d\n",
-//		info->startpoint.line, info->startpoint.current);
 	fill_image(info);
 	mlx_put_image_to_window((void*)info->mlx, (void*)info->win,
 		(void*)info->image_pointer, 0, 0);

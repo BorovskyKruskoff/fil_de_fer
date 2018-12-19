@@ -3,7 +3,7 @@
 //x and y will equal 1 if a line or column need to be drawn respectively
 //otherwise anything else is ignored and draws nothing
 
-void	draw(struct info *info, int x, int y)
+void draw(struct info *info, int x, int y)
 {
 	info->rest.x -= x;
 	info->rest.y -= y;
@@ -17,7 +17,7 @@ void	draw(struct info *info, int x, int y)
 	}
 }
 
-void	prepare_draw_big(struct info *info)
+void prepare_draw_big(struct info *info)
 {
 	double x = 0.0;
 	double y = 0.0;
@@ -43,7 +43,7 @@ void	prepare_draw_big(struct info *info)
 	}
 	while (info->rest.x >= 1)
 	{
-		draw(info, 1, 0, rest);
+		draw(info, 1, 0);
 		x -= 1;
 	}
 /*
@@ -76,7 +76,7 @@ void	prepare_draw_big(struct info *info)
 */
 }
 
- void	prepare_draw(struct info *info)
+void prepare_draw(struct info *info)
 {
 	if (info->rest.x >= 1.0 && info->rest.y >= 1.0)
 		prepare_draw_big(info);
@@ -91,7 +91,7 @@ void	prepare_draw_big(struct info *info)
 	info->decimals.y = info->rest.y;
 }
 
-int	trace(struct info *info)
+void trace(struct info *info)
 {
 	info->is_pos.x = 1;
 	info->is_pos.y = 1;
@@ -108,5 +108,4 @@ int	trace(struct info *info)
 	info->rest.x = (info->angle.x * info->gap) + info->decimals.x;
 	info->rest.y = (info->angle.y * info->gap) + info->decimals.y;
 	prepare_draw(info);
-	return 1;
 }

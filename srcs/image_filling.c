@@ -5,25 +5,23 @@
 ** 1 means down, 0 means right
 */
 
-double			dif(struct info *info, double dir)
+double dif(struct info *info, double dir)
 {
 	int	a = info->y;
 	int	b = info->x;
 	if (dir == 0)
 	{
-//		printf("Right : %d\n", info->tab[a][b + 1] - info->tab[a][b]);
 		return (double)(info->tab[a][b + 1] - info->tab[a][b]);
 	}
 	else
 	{
-//		printf("Down : %d\n", info->tab[a + 1][b] - info->tab[a][b]);
 		return (double)(info->tab[a + 1][b] - info->tab[a][b]);
 	}
 }
 
 //sqrt and pow are functions that exist
 
-double			get_angle(struct info *info, double dir)
+double get_angle(struct info *info, double dir)
 {
 	double	itself;
 	double	result;
@@ -37,46 +35,106 @@ double			get_angle(struct info *info, double dir)
 	return result;
 }
 
-static int		get_line(struct point *actual, struct info *info)
+static void get_line(struct info *info)
 {
 	info->angle.x = info->vectors_hor.x + dif(info, 0)
 		* (float)info->height * sin(info->rot_x) * cos(info->rot_z);
 	info->angle.y = info->vectors_hor.y + dif(info, 0)
 		* (float)info->height * sin(info->rot_y) * cos(info->rot_z);
-//	printf("X = %lf Y = %lf\n", info->vectors_hor.x + dif(info, 0) * (float)info->height * sin(info->rot_x), info->vectors_hor.y + dif(info, 0) * (float)info->height * sin(info->rot_y));
-	if (!(trace(info)))
-		return 0;
-	return 1;
+	trace(info);
 }
 
-static int		get_column(struct point *actual, struct info *info)
+static void get_column(struct info *info)
 {
-	struct point	save;
-
-	save.current = actual->current;
-	save.line = actual->line;
 	info->angle.x = info->vectors_vert.x + dif(info, 1)
 		* (float)info->height * sin(info->rot_x) * cos(info->rot_z);
 	info->angle.y = info->vectors_vert.y + dif(info, 1)
 		* (float)info->height * sin(info->rot_y) * cos(info->rot_z);
-//	printf("X = %lf Y = %lf\n", info->angle.x = info->vectors_vert.x + dif(info, 1) * (float)info->height * sin(info->rot_x), info->angle.y = info->vectors_vert.y + dif(info, 1) * (float)info->height * sin(info->rot_y));
-	if (!(trace(info)))
-		return 0;
-	if (!(info->transition))
-	{
-		info->actual.current = save.current;
-		info->actual.line = save.line;
-	}
-	else
-		info->transition = 0;
-	return 1;
+	trace(info);
 }
 
-/*
-** dir indicates the direction of the point difference
-** 1 means down, 0 means right
-*/
+void swap_decimals(struct vectors decimals_1, struct vectors decimals_2)
+{
+	struct vectors storage;
 
+	storage.x = decimals_1.x;
+	storage.y = decimals_1.y;
+	decimals_1.x = decimals_2.x;
+	decimals_1.y = decimals_2.y;
+	decimals_2.x = storage.x;
+	decimals_2.y = storage.y;
+}
+
+void draw_lines(struct info *info)
+{
+	struct vectors decimal_storage;
+
+	info->y = 0;
+	while (info->y + 1 < info->size)
+	{
+		info->x = 0;
+		decimal_storage.x = 0.0;
+		decimal_storage.y = 0.0;
+		get_column(info);
+		info->y += 1;
+		swap_decimals(info->decimals, decimal_storage);
+		info->startpoint.current = info->actual.current;
+		info->startpoint.line = info->actual.line;
+		while (info->x + 1 < info->size)
+		{
+			get_line(info);
+			info->x += 1;
+		}
+		swap_decimals(info->decimals, decimal_storage);
+		info->actual.current = info->startpoint.current;
+		info->actual.line = info->startpoint.line;
+	}	
+}
+
+void draw_columns(struct info *info)
+{
+	struct vectors decimal_storage;
+
+	info->x = 0;
+	while (info->x + 1 < info->size)
+	{
+		info->y = 0;
+		decimal_storage.x = 0.0;
+		decimal_storage.y = 0.0;
+		get_line(info);
+		info->x += 1;
+		swap_decimals(info->decimals, decimal_storage);
+		info->startpoint.current = info->actual.current;
+		info->startpoint.line = info->actual.line;
+		while (info->y + 1 < info->size)
+		{
+			get_column(info);
+			info->y += 1;
+		}
+		swap_decimals(info->decimals, decimal_storage);
+		info->actual.current = info->startpoint.current;
+		info->actual.line = info->startpoint.line;
+	}	
+}
+
+int fill_image(struct info *info)
+{
+	struct point save;
+
+	info->actual.current = info->startpoint.current;
+	info->actual.line = info->startpoint.line;
+	save.current = info->startpoint.current;
+	save.line = info->startpoint.line;
+	draw_lines(info);
+	info->actual.current = save.current;
+	info->actual.line = save.line;
+	draw_columns(info);
+	return 0;
+}
+
+
+
+/*
 int			fill_image(struct info *info)
 {
 	info->actual.current = info->startpoint.current;
@@ -100,7 +158,7 @@ int			fill_image(struct info *info)
 		info->startpoint.current = info->actual.current;
 		info->startpoint.line = info->actual.line;
 		info->y += 1;
-//		mlx_loop(mlx);
 	}
 	return 0;
 }
+*/

@@ -72,7 +72,7 @@ struct info
 	struct color_node *colorlist;
 };
 
-int trace(struct info *info);
+void trace(struct info *info);
 void put_pixel(struct info *info, struct point *actual, int color);
 double start_fill(struct info *info);
 double create_image(struct info *info);

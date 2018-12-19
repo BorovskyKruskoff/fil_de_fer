@@ -27,7 +27,7 @@ static void reset_coordinates(struct info *info)
 	info->pos_x = 0;
 	info->pos_y = 0;
 	info->pos_z = 0;
-	info->height = 1.0;
+	info->height = 0.5;
 }
 
 static void other_keys(int keycode, struct info *info)
@@ -43,9 +43,9 @@ static void other_keys(int keycode, struct info *info)
 	if (keycode == 65362)
 		info->pos_y -= 25;
 	if (keycode == 65451)
-		info->height += 0.2;
+		info->height += 0.1;
 	if (keycode == 65453)
-		info->height -= 0.2;
+		info->height -= 0.1;
 	if (keycode == 65307)
 		exit(0);
 }
