@@ -56,7 +56,9 @@ struct info
 	int size;
 	int **tab;
 	int transition;
+	int drawing_column;
 	struct point actual;
+	struct vectors rest;
 	struct vectors is_pos;
 	struct vectors vectors_hor;
 	struct vectors vectors_vert;
